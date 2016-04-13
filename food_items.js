@@ -6,37 +6,37 @@
 var food_items = [
     {
         name: "Lasagna",
-        food_classes: ["C"],
+        food_class: "C",
         icon_url: "graphics/example.png",
     },
     
     {
         name: "Steamed Rice",
-        food_classes: ["C"],
+        food_class: "C",
         icon_url: "graphics/example.png",
     },
     
     {
         name: "Roast Lamb",
-        food_classes: ["P"],
+        food_class: "P",
         icon_url: "graphics/example.png",
     },
     
     {
         name: "Asparagus",
-        food_classes: ["V"],
+        food_class: "V",
         icon_url: "graphics/example.png",
     },
     
     {
-        name: "Spaghetti and Meatballs",
-        food_classes: ["C", "P"],
+        name: "Spaghetti",
+        food_class: "C",
         icon_url: "graphics/example.png",
     },
     
     {
         name: "Flan",
-        food_classes: ["D"],
+        food_class: "D",
         icon_url: "graphics/example.png",
     },
 ];

@@ -1,9 +1,106 @@
+/**********************************
+ * click_and_drag_module implements the click and drag functionality
+ * for food items.
+ **********************************/
+var click_and_drag_module = (function() {
+    
+    var class_selected = "item_selected";
+    var update_event = "click_and_drag_update";
+    var update_event_context = {
+        trash_can_item: null,
+        dinner_plate_item: null,
+        dessert_plate_item: null,
+    };
+    var offsetX = 0;
+    var offsetY = 0;
+    
+    var get_element_containing_coords = function(x, y) {
+        var trashcan_offset = $("#trash_can").offset();
+        var dinnerplate_offset = $("#dinner_plate").offset();
+        var dessertplate_offset = $("#dessert_plate").offset();
+        if (x >= trashcan_offset.left 
+            && x <= trashcan_offset.left + $("#trash_can").width()
+            && y >= trashcan_offset.top 
+            && y <= trashcan_offset.top + $("#trash_can").height()) {
+            return "trash";
+        } else if (x >= dinnerplate_offset.left 
+                   && x <= dinnerplate_offset.left + $("#dinner_plate").width()
+                   && y >= dinnerplate_offset.top 
+                   && y <= dinnerplate_offset.top + $("#dinner_plate").height()) {
+            return "dinner";
+        } else if (x >= dessertplate_offset.left 
+                   && x <= dessertplate_offset.left + $("#dessert_plate").width()
+                   && y >= dessertplate_offset.top 
+                   && y <= dessertplate_offset.top + $("#dessert_plate").height()) {
+            return "dessert";
+        }
+        return "";
+    };
+    
+    var mouse_down_function = function(event) {
+        event.preventDefault();
+        
+        update_event_context.trash_can_item = null;
+        update_event_context.dinner_plate_item = null;
+        update_event_context.dessert_plate_item = null;
+        
+        var selected = $(this);
+        selected.addClass(class_selected);
+        offsetX = selected.offset().left - event.pageX;
+        offsetY = selected.offset().top - event.pageY;
+        $("body").append(selected);
+        selected.css("left", event.pageX + offsetX + 45);
+        selected.css("top", event.pageY + offsetY - 30);
+    };
+    
+    var mouse_move_function = function() {
+        var selected = $("." + class_selected);
+        selected.css("left", event.pageX + offsetX + 45);
+        selected.css("top", event.pageY + offsetY - 30);
+    };
+    
+    var mouse_up_function = function(event) {
+        var selected = $("." + class_selected);
+        if (selected.length == 0) { //if no element is selected
+            return;
+        }
+        
+        var element = get_element_containing_coords(event.pageX, event.pageY);
+        switch(element) {
+            case "trash": update_event_context.trash_can_item = selected.data("item"); break;
+            case "dinner": update_event_context.dinner_plate_item = selected.data("item"); break;
+            case "dessert": update_event_context.dessert_plate_item = selected.data("item"); break;
+            default: break;
+        }
+        selected.remove();
+        
+        $("body").trigger(update_event, update_event_context);
+    };
+    
+    var apply = function() {
+        $(".food_item").mousedown(mouse_down_function);
+    };
+
+    var initialize = function() {
+        $(window).mousemove(mouse_move_function);
+        $(window).mouseup(mouse_up_function);
+    };
+    
+    return {
+        initialize: initialize,
+        apply: apply,
+        update_event: update_event,
+    };
+
+}());
+
 
 /**********************************
- * food_table_module implements tab functionality, food table population,
- * and click and drag functionality.
+ * tabs_module implements tab functionality and food table population.
  **********************************/
-var food_table_module = (function(food_items) {
+var tabs_module = (function(food_items) {
+    
+    var update_event = "tabs_update";
     
     var desserts_unlocked = false;
     
@@ -11,9 +108,9 @@ var food_table_module = (function(food_items) {
         var current_food_items = [];
     	for (var i = 0; i < food_items.length; i++) {
     	    var food_item = food_items[i];
-    	    if ( (food_class == "A" && desserts_unlocked && food_item.food_classes.indexOf("D") != -1)
-    	         || (food_class == "A" && food_item.food_classes.indexOf("D") == -1)
-    	         || (food_item.food_classes.indexOf(food_class) != -1)
+    	    if ( (food_class == "A" && desserts_unlocked && food_item.food_class == "D")
+    	         || (food_class == "A" && food_item.food_class != "D")
+    	         || (food_item.food_class == food_class)
     	        ) {
     	        current_food_items.push(food_item);
     	    }
@@ -30,19 +127,17 @@ var food_table_module = (function(food_items) {
     	    food_item_div.addClass("food_item");
     	    //food_item_div.css("background-image", "url(" + food_item.icon_url + ")");
     	    //food_item_div.css("background-size", "cover");
+    	    food_item_div.data("item", food_item);
     	    
     	    food_item_wrapper.append(food_item_div);
     	    food_table.append(food_item_wrapper);
     	}
     	
-    	$(".food_item").mousedown(function(event) {
-            event.preventDefault();
-            var selected = $(this);
-            selected.addClass("food_selected");
-            $("body").append(selected);
-            selected.css("left", event.pageX);
-            selected.css("top", event.pageY);
-        });
+    	$("body").trigger(update_event);
+    };
+    
+    var refresh_food_bank = function() {
+        populate_food_bank($(".tab_selected").attr("id").slice(-1));
     };
     
     var activate_desserts = function() {
@@ -72,28 +167,117 @@ var food_table_module = (function(food_items) {
             }
         });
         
-        $(window).mousemove(function(event, ui) {
-            var selected = $(".food_selected");
-            selected.css("left", event.pageX);
-            selected.css("top", event.pageY);
-        });
-        
-        $(window).mouseup(function(event) {
-            var selected = $(".food_selected");
-            selected.remove();
-            populate_food_bank($(".tab_selected").attr("id").slice(-1));
-        });
-        
         populate_food_bank("A");
     };
     
     return {
+        initialize: initialize,
+        refresh_food_bank: refresh_food_bank,
         activate_desserts: activate_desserts,
         deactivate_desserts: deactivate_desserts,
-        initialize: initialize,
+        update_event: update_event,
     };
     
 }(food_items));
+
+
+
+/**********************************
+ * state_module implements the functionality to record and
+ * update the state of the plates.
+ **********************************/
+var state_module = (function() {
+    
+    var update_event = "state_update";
+    var dinner_plate_items = [];
+    var dessert_plate_item = null;
+    var desserts_activated = false;
+    
+    var populate_plates = function() {
+        $("#dinner_plate_P").empty();
+        $("#dinner_plate_C").empty();
+        $("#dinner_plate_V").empty();
+        $("#dessert_plate").empty();
+        
+        for (var i = 0; i < dinner_plate_items.length; i++) {
+            var food_item = dinner_plate_items[i];
+            var food_item_div = $("<div/>");
+    	    food_item_div.addClass("food_item");
+    	    //food_item_div.css("background-image", "url(" + food_item.icon_url + ")");
+    	    //food_item_div.css("background-size", "cover");
+    	    $.data(food_item_div, "item", food_item);
+            $("#dinner_plate_" + food_item.food_class).append(food_item_div);
+        }
+        
+        if (dessert_plate_item != null) {
+            var food_item_div = $("<div/>");
+    	    food_item_div.addClass("food_item");
+    	    //food_item_div.css("background-image", "url(" + dessert_plate_item.icon_url + ")");
+    	    //food_item_div.css("background-size", "cover");
+    	    $.data(food_item_div, "item", dessert_plate_item);
+            $("#dessert_plate").append(food_item_div);
+        }
+    };
+    
+    var activate_desserts = function() {
+        desserts_activated = true;
+    };
+    
+    var add_dinner_item = function(item) {
+        if (item.food_class == "D") {
+            $("body").trigger(update_event, desserts_activated);
+            return;
+        }
+        
+        var replaced = false;
+        for (var i = 0; i < dinner_plate_items.length; i++) {
+            var food_item = dinner_plate_items[i];
+            if (item.food_class == food_item.food_class) {
+                dinner_plate_items[i] = item;
+                replaced = true;
+            }
+        }
+        if (!replaced) {
+            dinner_plate_items.push(item);
+        }
+        if (dinner_plate_items.length == 3) {
+            activate_desserts();
+        }
+        populate_plates();
+        $("body").trigger(update_event, desserts_activated);
+    };
+    
+    var add_dessert_item = function(item) {
+        dessert_plate_item = item;
+        populate_plates();
+    };
+    
+    var delete_item = function(item) {
+        if (item == dessert_plate_item) {
+            dessert_plate_item = null;
+        } else if (dinner_plate_items.indexOf(item) != -1) {
+            //TODO
+            desserts_activated = false;
+        }
+        
+        $("body").trigger(update_event, desserts_activated);
+        populate_plates();
+    };
+    
+    var initialize = function() {
+        populate_plates();
+    };
+    
+    return {
+        initialize: initialize,
+        add_dinner_item: add_dinner_item,
+        add_dessert_item: add_dessert_item,
+        delete_item: delete_item,
+        refresh: populate_plates,
+        update_event: update_event,
+    };
+    
+}());
 
 
 
@@ -102,7 +286,36 @@ var food_table_module = (function(food_items) {
  **********************************/ 
 $(document).ready(function() {     
     
-    food_table_module.initialize();
+    $("body").on(click_and_drag_module.update_event, function(event, context) {
+        tabs_module.refresh_food_bank();
+        if (context.trash_can_item != null) {
+            state_module.delete_item(context.trash_can_item);
+        } else if (context.dinner_plate_item != null) {
+            state_module.add_dinner_item(context.dinner_plate_item);
+        } else if (context.dessert_plate_item != null) {
+            state_module.add_dessert_item(context.dessert_plate_item);
+        } else {
+            state_module.refresh();
+        }
+    });
+    
+    $("body").on(tabs_module.update_event, function() {
+        click_and_drag_module.apply();
+    });
+    
+    $("body").on(state_module.update_event, function(event, desserts_activated) {
+        if (desserts_activated) {
+            tabs_module.activate_desserts();
+        } else {
+            tabs_module.deactivate_desserts();
+        }
+        click_and_drag_module.apply();
+    });
+    
+    
+    click_and_drag_module.initialize();
+    tabs_module.initialize();
+    state_module.initialize();
     
 });
 

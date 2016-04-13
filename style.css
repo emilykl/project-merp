@@ -27,7 +27,7 @@
  }
  
  #trash_can_wrapper {
-     width: 20%;
+     width: 25%;
      height: 100%;
      float: left;
  }
@@ -39,7 +39,7 @@
  }
  
  #dinner_plate_wrapper {
-     width: 40%;
+     width: 50%;
      height: 100%;
      float: left;
  }
@@ -47,11 +47,30 @@
  #dinner_plate {
      width: 100%;
      height: 100%;
+     float: left;
      background-color: green;
  }
  
+ #dinner_plate_P {
+     width: calc(100%/3);
+     height: 100%;
+     float: left;
+ }
+ 
+ #dinner_plate_C {
+     width: calc(100%/3);
+     height: 100%;
+     float: left;
+ }
+ 
+ #dinner_plate_V {
+     width: calc(100%/3);
+     height: 100%;
+     float: left;
+ }
+ 
  #dessert_plate_wrapper {
-     width: 40%;
+     width: 25%;
      height: 100%;
      float: left;
  }
@@ -60,6 +79,10 @@
      width: 100%;
      height: 100%;
      background-color: blue;
+ }
+ 
+ .hidden {
+     display: none;
  }
 
 
@@ -129,11 +152,7 @@
      position: absolute;
      left: 50%;
      transform: translateX(-50%);
-     background-color: blue;
- }
- 
- .food_selected {
-     position: absolute;
+     background-color: orange;
  }
  
  
