@@ -71,6 +71,8 @@ td{
      background-color: green;
      text-align: center;
      vertical-align: center;
+     background: url('img/placemat.png') no-repeat center;
+     background-size: contain;
  }
  
  #dinner_plate_P {
