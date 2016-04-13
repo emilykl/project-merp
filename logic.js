@@ -66,6 +66,7 @@ var click_and_drag_module = (function() {
         }
         
         var element = get_element_containing_coords(event.pageX, event.pageY);
+        console.log(selected.data("item"));
         switch(element) {
             case "trash": update_event_context.trash_can_item = selected.data("item"); break;
             case "dinner": update_event_context.dinner_plate_item = selected.data("item"); break;
