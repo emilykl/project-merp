@@ -125,8 +125,9 @@ var tabs_module = (function(food_items) {
     	    
     	    var food_item_div = $("<div/>");
     	    food_item_div.addClass("food_item");
-    	    //food_item_div.css("background-image", "url(" + food_item.icon_url + ")");
-    	    //food_item_div.css("background-size", "cover");
+    	    food_item_div.css("background-image", "url(" + food_item.icon_url + ")");
+    	    food_item_div.css("background-size", "100%");
+            food_item_div.css("background-repeat", "no-repeat");
     	    food_item_div.data("item", food_item);
     	    
     	    food_item_wrapper.append(food_item_div);
