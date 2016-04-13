@@ -49,24 +49,29 @@
      height: 100%;
      float: left;
      background-color: green;
+     text-align: center;
+     vertical-align: center;
  }
  
  #dinner_plate_P {
      width: calc(100%/3);
      height: 100%;
      float: left;
+     vertical-align: center;
  }
  
  #dinner_plate_C {
      width: calc(100%/3);
      height: 100%;
      float: left;
+     vertical-align: center;
  }
  
  #dinner_plate_V {
      width: calc(100%/3);
      height: 100%;
      float: left;
+     vertical-align: center;
  }
  
  #dessert_plate_wrapper {
@@ -79,6 +84,8 @@
      width: 100%;
      height: 100%;
      background-color: blue;
+     text-align: center;
+     vertical-align: center;
  }
  
  .hidden {
@@ -153,6 +160,26 @@
      left: 50%;
      transform: translateX(-50%);
      background-color: orange;
+ }
+
+  .small_icon {
+    width: 20px;
+    height: 20px;
+ }
+
+.med_icon {
+    width: 40px;
+    height: 40px;
+ }
+
+ #dinner_plate_image {
+    max-width: 100%;
+    max-height: 80%;
+ }
+
+  #dessert_plate_image {
+    max-width: 75%;
+    max-height: 75%;
  }
  
  
