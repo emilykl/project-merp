@@ -2,6 +2,10 @@ body {
 	font-family: Arial;
 }
 
+body {
+    background-color: #B3E3F2;
+}
+
 #content_wrapper {
     width: 1000px;
     height: 670px;
@@ -56,7 +60,8 @@ td{
      width: 100%;
      height: 100%;
      background-color: black;
- }
+     text-align: center;
+}
  
  #dinner_plate_wrapper {
      width: 50%;
@@ -181,7 +186,7 @@ td{
      position: absolute;
      left: 50%;
      transform: translateX(-50%);
-     background-color: orange;
+     /*background-color: orange;*/
  }
 
   .small_icon {
@@ -202,6 +207,11 @@ td{
   #dessert_plate_image {
     max-width: 75%;
     max-height: 75%;
+ }
+
+   #trash_can_image {
+    max-width: 50%;
+    max-height: 50%;
  }
  
  
