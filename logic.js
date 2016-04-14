@@ -217,6 +217,7 @@ var state_module = (function(dinner_menu, dessert_menu) {
     	    food_item_div.css("background-image", "url(" + food_item.icon_url + ")");
     	    food_item_div.css("background-repeat", "no-repeat");
     	    food_item_div.css("background-size", "contain");
+            food_item_div.css("background-color", "transparent");
     	    food_item_div.data("item", food_item);
             $("#dinner_plate_" + food_item.food_class).append(food_item_div);
 
