@@ -253,6 +253,7 @@ var state_module = (function(dinner_menu, dessert_menu) {
     
     var activate_desserts = function() {
         $('#' + current_day + ' img').attr('src', 'img/smiley_full.png');
+        $('#tab_D img').attr('src', 'img/icon_d1.png');
         desserts_activated = true;
         $('#dessert_plate').css({
         	'visibility': 'visible'
@@ -261,6 +262,7 @@ var state_module = (function(dinner_menu, dessert_menu) {
 
     var deactivate_desserts = function() {
     	$('#' + current_day + ' img').attr('src', 'img/smiley_empty.png');
+    	$('#tab_D img').attr('src', 'img/lock.png');
     	desserts_activated = false;
     	$('#dessert_plate').css({
     		'visibility': 'hidden'
