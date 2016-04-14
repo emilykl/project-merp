@@ -301,7 +301,7 @@ var state_module = (function(dinner_menu, dessert_menu) {
         } else if (dinner_plate_items.indexOf(item) != -1) {
             var dinner_index = dinner_plate_items.indexOf(item);
             dinner_plate_items.splice(dinner_index, 1);
-            desserts_activated = false;
+            deactivate_desserts();
         }
         populate_plates(current_day);
     };
