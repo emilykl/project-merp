@@ -246,14 +246,15 @@ var state_module = (function(dinner_menu, dessert_menu) {
     var activate_desserts = function() {
         desserts_activated = true;
         $('#dessert_plate').css({
-        	"background-image" : "url(img/dessert.png)",
-        	"background-size" : "contain",
-        	"background-repeat" : "no-repeat"
+        	'visibility': 'visible'
         });
     };
 
     var deactivate_desserts = function() {
     	desserts_activated = false;
+    	$('#dessert_plate').css({
+    		'visibility': 'hidden'
+    	});
     };
     
     var add_dinner_item = function(item) {
@@ -308,6 +309,8 @@ var state_module = (function(dinner_menu, dessert_menu) {
     	});
         dinner_plate_items = dinner_menu[which_day];
         dessert_plate_item = dessert_menu[which_day];
+        if (dinner_plate_items.length == 3) activate_desserts();
+        else deactivate_desserts();
         populate_plates(which_day);
     };
     
