@@ -17,7 +17,7 @@ var dinner_menu = {
 		{
 		    name: "Asparagus",
 		    food_class: "V",
-		    icon_url: "img/food_asparagus.png",
+		    icon_url: "img/food_broccoli.png",
 		},
 	],
 	"tue": [],
