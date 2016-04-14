@@ -67,7 +67,6 @@ var click_and_drag_module = (function() {
         }
         
         var element = get_element_containing_coords(event.pageX, event.pageY);
-        console.log(selected.data("item"));
         switch(element) {
             case "trash": update_event_context.trash_can_item = selected.data("item"); break;
             case "dinner": update_event_context.dinner_plate_item = selected.data("item"); break;
@@ -127,8 +126,9 @@ var tabs_module = (function(food_items) {
     	    
     	    var food_item_div = $("<div/>");
     	    food_item_div.addClass("food_item");
-    	    //food_item_div.css("background-image", "url(" + food_item.icon_url + ")");
-    	    //food_item_div.css("background-size", "cover");
+    	    food_item_div.css("background-image", "url(" + food_item.icon_url + ")");
+    	    food_item_div.css("background-size", "100%");
+            food_item_div.css("background-repeat", "no-repeat");
     	    food_item_div.data("item", food_item);
     	    
     	    food_item_wrapper.append(food_item_div);
@@ -188,9 +188,10 @@ var tabs_module = (function(food_items) {
  * state_module implements the functionality to record and
  * update the state of the plates.
  **********************************/
-var state_module = (function() {
+var state_module = (function(dinner_menu, dessert_menu) {
     
     var update_event = "state_update";
+    var current_day = null; 
     var dinner_plate_items = [];
     var dessert_plate_item = null;
     var desserts_activated = false;
@@ -205,8 +206,9 @@ var state_module = (function() {
             var food_item = dinner_plate_items[i];
             var food_item_div = $("<div/>");
     	    food_item_div.addClass("food_item");
-    	    //food_item_div.css("background-image", "url(" + food_item.icon_url + ")");
-    	    //food_item_div.css("background-size", "cover");
+    	    food_item_div.css("background-image", "url(" + food_item.icon_url + ")");
+    	    food_item_div.css("background-repeat", "no-repeat");
+    	    food_item_div.css("background-size", "contain");
     	    $.data(food_item_div, "item", food_item);
             $("#dinner_plate_" + food_item.food_class).append(food_item_div);
         }
@@ -224,6 +226,15 @@ var state_module = (function() {
     
     var activate_desserts = function() {
         desserts_activated = true;
+        $('#dessert_plate').css({
+        	"background-image" : "url(img/dessert.png)",
+        	"background-size" : "contain",
+        	"background-repeat" : "no-repeat"
+        });
+    };
+
+    var deactivate_desserts = function() {
+    	desserts_activated = false;
     };
     
     var add_dinner_item = function(item) {
@@ -244,28 +255,41 @@ var state_module = (function() {
             dinner_plate_items.push(item);
         }
         if (dinner_plate_items.length == 3) {
+        	$('#' + current_day + ' img').attr('src', 'img/smiley_full.png');
             activate_desserts();
         }
-        populate_plates();
+        dinner_menu[current_day] = dinner_plate_items;
+        populate_plates(current_day);
     };
     
     var add_dessert_item = function(item) {
         dessert_plate_item = item;
-        populate_plates();
+        dessert_menu[current_day] = dessert_plate_item;
+        populate_plates(current_day);
     };
     
     var delete_item = function(item) {
         if (item == dessert_plate_item) {
             dessert_plate_item = null;
+        	dessert_menu[current_day] = dessert_plate_item;
         } else if (dinner_plate_items.indexOf(item) != -1) {
             //TODO
             desserts_activated = false;
         }
-        populate_plates();
+        populate_plates(current_day);
     };
     
-    var initialize = function() {
-        populate_plates();
+    var initialize = function(which_day) {
+        current_day = which_day;
+        $(".day").css({
+    		"border": "1px solid #999"
+    	});
+    	$("#" + which_day).css({
+    		"border": "none"
+    	});
+        dinner_plate_items = dinner_menu[which_day];
+        dessert_plate_item = dessert_menu[which_day];
+        populate_plates(which_day);
     };
     
     return {
@@ -277,7 +301,7 @@ var state_module = (function() {
         update_event: update_event,
     };
     
-}());
+}(dinner_menu, dessert_menu));
 
 
 
@@ -285,7 +309,6 @@ var state_module = (function() {
  * run on load.
  **********************************/ 
 $(document).ready(function() {     
-    
     $("body").on(click_and_drag_module.update_event, function(event, context) {
         tabs_module.refresh_food_bank();
         if (context.trash_can_item != null) {
@@ -311,11 +334,15 @@ $(document).ready(function() {
         }
         click_and_drag_module.apply();
     });
+
+    $(".day").click(function(e){
+    	state_module.initialize(e.currentTarget.id);
+    });
     
     
     click_and_drag_module.initialize();
     tabs_module.initialize();
-    //state_module.initialize();
+    state_module.initialize("sun");
     
 });
 
