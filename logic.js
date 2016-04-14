@@ -49,14 +49,15 @@ var click_and_drag_module = (function() {
         offsetX = selected.offset().left - event.pageX;
         offsetY = selected.offset().top - event.pageY;
         $("body").append(selected);
-        selected.css("left", event.pageX + offsetX + 45);
-        selected.css("top", event.pageY + offsetY - 30);
+        selected.css("position", "absolute");
+        selected.css("left", event.pageX + offsetX);
+        selected.css("top", event.pageY + offsetY);
     };
     
     var mouse_move_function = function() {
         var selected = $("." + class_selected);
-        selected.css("left", event.pageX + offsetX + 45);
-        selected.css("top", event.pageY + offsetY - 30);
+        selected.css("left", event.pageX + offsetX);
+        selected.css("top", event.pageY + offsetY);
     };
     
     var mouse_up_function = function(event) {
@@ -195,10 +196,10 @@ var state_module = (function() {
     var desserts_activated = false;
     
     var populate_plates = function() {
-        $("#dinner_plate_P").empty();
-        $("#dinner_plate_C").empty();
-        $("#dinner_plate_V").empty();
-        $("#dessert_plate").empty();
+        $("#dinner_plate_P .food_item").remove();
+        $("#dinner_plate_C .food_item").remove();
+        $("#dinner_plate_V .food_item").remove();
+        $("#dessert_plate .food_item").remove();
         
         for (var i = 0; i < dinner_plate_items.length; i++) {
             var food_item = dinner_plate_items[i];
@@ -218,6 +219,7 @@ var state_module = (function() {
     	    $.data(food_item_div, "item", dessert_plate_item);
             $("#dessert_plate").append(food_item_div);
         }
+        $("body").trigger(update_event, desserts_activated);
     };
     
     var activate_desserts = function() {
@@ -245,7 +247,6 @@ var state_module = (function() {
             activate_desserts();
         }
         populate_plates();
-        $("body").trigger(update_event, desserts_activated);
     };
     
     var add_dessert_item = function(item) {
@@ -260,8 +261,6 @@ var state_module = (function() {
             //TODO
             desserts_activated = false;
         }
-        
-        $("body").trigger(update_event, desserts_activated);
         populate_plates();
     };
     
@@ -316,7 +315,7 @@ $(document).ready(function() {
     
     click_and_drag_module.initialize();
     tabs_module.initialize();
-    state_module.initialize();
+    //state_module.initialize();
     
 });
 

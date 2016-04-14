@@ -13,7 +13,7 @@
 <div id="content_wrapper">
         
     <div id="calendar_wrapper">
-        <table>
+        <table id="calendar">
         	<tr>
         		<td id="left_arrow" class="arrow"><img src="img/arrow.png"></img></td>
         		<td id="mon" class="day">Mon (4/11)<img src="img/sad face.png"></td>
@@ -37,17 +37,23 @@
     	
     	<div id="dinner_plate_wrapper">
     	    <div id="dinner_plate">
-                <img id="dinner_plate_image" src="img/placemat.png"></img><br/>
-    	        <div id="dinner_plate_P"><img class="med_icon" src="img/icon_p0.png"></img></div>
-    	        <div id="dinner_plate_C"><img class="med_icon" src="img/icon_c0.png"></img></div>
-    	        <div id="dinner_plate_V"><img class="med_icon" src="img/icon_v0.png"></img></div>
+    	        <table>
+    	            <tr>
+    	                <td id="dinner_plate_P"></div></td>
+    	                <td id="dinner_plate_C"></div></td>
+    	                <td id="dinner_plate_V"></td>
+    	            </tr>
+    	        </table>
+    	    </div>
+    	    <div id="dinner_plate_icon_wrapper">
+    	        <img class="med_icon" src="img/icon_p0.png"></img>
+    	        <img class="med_icon" src="img/icon_c0.png"></img>
+    	        <img class="med_icon" src="img/icon_v0.png"></img>
     	    </div>
     	</div>
     	
     	<div id="dessert_plate_wrapper">
-    	    <div id="dessert_plate" lclass="hidden">
-                <img id="dessert_plate_image" src="img/dessert.png"></img>
-    	    </div>
+    	    <div id="dessert_plate" lclass="hidden"></div>
     	</div>
     	
     </div>

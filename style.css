@@ -5,7 +5,6 @@ body {
 #content_wrapper {
     width: 1000px;
     height: 670px;
-    border: 1px solid green;
     margin: 0 auto;
 }
 
@@ -17,12 +16,12 @@ body {
     color: #999;
 }
 
-table{
+#calendar{
 	width: 100%;
 	height: 100%;
 }
 
-td{
+#calendar td{
 	top: 50px;
 	width: 11%;
 	height: 100%;
@@ -43,7 +42,7 @@ td{
  
  #plates_wrapper {
     width: 100%;
-    height: 40%;
+    height: 50%;
  }
  
  #trash_can_wrapper {
@@ -55,7 +54,6 @@ td{
  #trash_can {
      width: 100%;
      height: 100%;
-     background-color: black;
  }
  
  #dinner_plate_wrapper {
@@ -66,32 +64,32 @@ td{
  
  #dinner_plate {
      width: 100%;
-     height: 100%;
+     height: calc(100% - 50px);
      float: left;
-     background-color: green;
      text-align: center;
      vertical-align: center;
+     background-image: url("img/placemat.png");
+     background-size: contain;
+     background-repeat: no-repeat;
+     background-position: center center;  
  }
  
- #dinner_plate_P {
-     width: calc(100%/3);
-     height: 100%;
-     float: left;
-     vertical-align: center;
+ #dinner_plate table {
+     width: calc(100% - 200px);
+	 height: 200px;
+	 margin-top: 40px;
+	 margin-left: 100px;
+	 table-layout: fixed;
+	 border-collapse: collapse;
  }
  
- #dinner_plate_C {
-     width: calc(100%/3);
-     height: 100%;
-     float: left;
-     vertical-align: center;
+ #dinner_plate_icon_wrapper {
+     width: 100%;
+     height: 50px;
  }
  
- #dinner_plate_V {
-     width: calc(100%/3);
-     height: 100%;
-     float: left;
-     vertical-align: center;
+  #dinner_plate_icon_wrapper img {
+     margin-left: calc(100%/6 + 10px);
  }
  
  #dessert_plate_wrapper {
@@ -101,11 +99,16 @@ td{
  }
  
  #dessert_plate {
-     width: 100%;
-     height: 100%;
-     background-color: blue;
+     width: calc(100%-80px);
+     height: calc(100% - 50px - 100px);
      text-align: center;
      vertical-align: center;
+     background-image: url("img/dessert.png");
+     background-size: contain;
+     background-repeat: no-repeat;
+     background-position: center center;  
+     padding-left: 80px;
+     padding-top: 100px;
  }
  
  .hidden {
@@ -120,7 +123,7 @@ td{
  
  #food_table_wrapper {
     width: 80%;
-    height: 40%;
+    height: 30%;
     margin: 0 auto;
     overflow: hidden;
     border: 1px solid black;
@@ -166,23 +169,20 @@ td{
  }
  
  .food_item_wrapper {
-     width: 25%;
-     height: 150px;
-     position: relative;
+     width: 18%;
+     height: 110px;
+     padding-left: 7%;
+     padding-top: 20px;
      float: left;
  }
  
  .food_item {
      width: 90px;
      height: 90px;
-     margin-top: 30px;
-     position: absolute;
-     left: 50%;
-     transform: translateX(-50%);
      background-color: orange;
  }
 
-  .small_icon {
+.small_icon {
     width: 20px;
     height: 20px;
  }
@@ -190,16 +190,6 @@ td{
 .med_icon {
     width: 40px;
     height: 40px;
- }
-
- #dinner_plate_image {
-    max-width: 100%;
-    max-height: 80%;
- }
-
-  #dessert_plate_image {
-    max-width: 75%;
-    max-height: 75%;
  }
  
  
