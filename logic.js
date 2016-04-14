@@ -18,6 +18,7 @@ var click_and_drag_module = (function() {
         var trashcan_offset = $("#trash_can").offset();
         var dinnerplate_offset = $("#dinner_plate").offset();
         var dessertplate_offset = $("#dessert_plate").offset();
+        var foodtable_offset = $('#food_table').offset();
         if (x >= trashcan_offset.left 
             && x <= trashcan_offset.left + $("#trash_can").width()
             && y >= trashcan_offset.top 
@@ -33,7 +34,12 @@ var click_and_drag_module = (function() {
                    && y >= dessertplate_offset.top 
                    && y <= dessertplate_offset.top + $("#dessert_plate").height()) {
             return "dessert";
-        }
+        } /*else if (x >= foodtable_offset.left 
+                   && x <= foodtable_offset.left + $("#food_table").width()
+                   && y >= foodtable_offset.top 
+                   && y <= foodtable_offset.top + $("#food_table").height()) {
+            return "food";
+        }*/
         return "";
     };
     
@@ -246,6 +252,7 @@ var state_module = (function(dinner_menu, dessert_menu) {
     };
     
     var activate_desserts = function() {
+        $('#' + current_day + ' img').attr('src', 'img/smiley_full.png');
         desserts_activated = true;
         $('#dessert_plate').css({
         	'visibility': 'visible'
@@ -253,6 +260,7 @@ var state_module = (function(dinner_menu, dessert_menu) {
     };
 
     var deactivate_desserts = function() {
+    	$('#' + current_day + ' img').attr('src', 'img/smiley_empty.png');
     	desserts_activated = false;
     	$('#dessert_plate').css({
     		'visibility': 'hidden'
@@ -276,10 +284,7 @@ var state_module = (function(dinner_menu, dessert_menu) {
         if (!replaced) {
             dinner_plate_items.push(item);
         }
-        if (dinner_plate_items.length == 3) {
-        	$('#' + current_day + ' img').attr('src', 'img/smiley_full.png');
-            activate_desserts();
-        }
+        if (dinner_plate_items.length == 3) activate_desserts();
         dinner_menu[current_day] = dinner_plate_items;
         populate_plates(current_day);
     };
