@@ -201,7 +201,15 @@ var state_module = (function(dinner_menu, dessert_menu) {
         $("#dinner_plate_C .food_item").remove();
         $("#dinner_plate_V .food_item").remove();
         $("#dessert_plate .food_item").remove();
-        
+
+        $("#icon_p").empty();
+        $("#icon_c").empty();
+        $("#icon_v").empty();
+
+        $("#icon_p").append('<img class="med_icon" src="img/icon_p0.png"></img>');
+        $("#icon_c").append('<img class="med_icon" src="img/icon_c0.png"></img>');
+        $("#icon_v").append('<img class="med_icon" src="img/icon_v0.png"></img>');
+
         for (var i = 0; i < dinner_plate_items.length; i++) {
             var food_item = dinner_plate_items[i];
             var food_item_div = $("<div/>");
@@ -211,6 +219,17 @@ var state_module = (function(dinner_menu, dessert_menu) {
     	    food_item_div.css("background-size", "contain");
     	    $.data(food_item_div, "item", food_item);
             $("#dinner_plate_" + food_item.food_class).append(food_item_div);
+
+            if (food_item.food_class == "P") {
+                $("#icon_p").empty();
+                $("#icon_p").append('<img class="med_icon" src="img/icon_p1.png"></img>');
+            } else if (food_item.food_class == "C") {
+                $("#icon_c").empty();
+                $("#icon_c").append('<img class="med_icon" src="img/icon_c1.png"></img>');
+            } else if (food_item.food_class == "V") {
+                $("#icon_v").empty();
+                $("#icon_v").append('<img class="med_icon" src="img/icon_v1.png"></img>');
+            }
         }
         
         if (dessert_plate_item != null) {
