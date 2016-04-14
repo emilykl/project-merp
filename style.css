@@ -189,7 +189,8 @@ body {
  .food_item {
      width: 90px;
      height: 90px;
-     background-color: orange;
+     background-color: #e0e0e0;
+     border-radius: 5px;
  }
 
 .small_icon {

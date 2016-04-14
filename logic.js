@@ -209,16 +209,17 @@ var state_module = (function(dinner_menu, dessert_menu) {
     	    food_item_div.css("background-image", "url(" + food_item.icon_url + ")");
     	    food_item_div.css("background-repeat", "no-repeat");
     	    food_item_div.css("background-size", "contain");
-    	    $.data(food_item_div, "item", food_item);
+    	    food_item_div.data("item", food_item);
             $("#dinner_plate_" + food_item.food_class).append(food_item_div);
         }
         
         if (dessert_plate_item != null) {
             var food_item_div = $("<div/>");
     	    food_item_div.addClass("food_item");
-    	    //food_item_div.css("background-image", "url(" + dessert_plate_item.icon_url + ")");
-    	    //food_item_div.css("background-size", "cover");
-    	    $.data(food_item_div, "item", dessert_plate_item);
+    	    food_item_div.css("background-image", "url(" + dessert_plate_item.icon_url + ")");
+    	    food_item_div.css("background-size", "contain");
+            food_item_div.css("background-repeat", "no-repeat");
+    	    food_item_div.data("item", dessert_plate_item);
             $("#dessert_plate").append(food_item_div);
         }
         $("body").trigger(update_event, desserts_activated);
@@ -239,7 +240,7 @@ var state_module = (function(dinner_menu, dessert_menu) {
     
     var add_dinner_item = function(item) {
         if (item.food_class == "D") {
-            $("body").trigger(update_event, desserts_activated);
+            populate_plates(current_day);
             return;
         }
         
@@ -263,6 +264,10 @@ var state_module = (function(dinner_menu, dessert_menu) {
     };
     
     var add_dessert_item = function(item) {
+        if (item.food_class != "D") {
+            populate_plates(current_day);
+            return;
+        }
         dessert_plate_item = item;
         dessert_menu[current_day] = dessert_plate_item;
         populate_plates(current_day);
@@ -273,7 +278,8 @@ var state_module = (function(dinner_menu, dessert_menu) {
             dessert_plate_item = null;
         	dessert_menu[current_day] = dessert_plate_item;
         } else if (dinner_plate_items.indexOf(item) != -1) {
-            //TODO
+            var dinner_index = dinner_plate_items.indexOf(item);
+            dinner_plate_items.splice(dinner_index, 1);
             desserts_activated = false;
         }
         populate_plates(current_day);
