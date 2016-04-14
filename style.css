@@ -1,5 +1,7 @@
 body {
 	font-family: Arial;
+    font-size: 18px;
+    background-color: #F3F3F3;
 }
 
 #content_wrapper {
@@ -15,7 +17,6 @@ body {
 #calendar_wrapper {
     width: 100%;
     height: 20%;
-    background-color: white;
     text-align: center;
     color: #999;
     margin: 20px;
@@ -136,9 +137,9 @@ body {
     height: 30%;
     margin: 0 auto;
     overflow: hidden;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     border-radius: 5px;
-    background-color: white;
+    background-color: #DDDDDD;
  }
  
  #food_table_tabs {
@@ -146,6 +147,7 @@ body {
      margin: 0;
      padding: 0;
      height: 30px;
+     background-color: #BBBBBB;
  }
  
  .food_table_tab {
@@ -154,7 +156,7 @@ body {
      width: calc(20% - 1px);
      height: 100%;
      
-     border: 1px solid black;
+     /*border: 1px solid black;*/
      border-top: 0;
      border-left: 0;
  }
@@ -166,10 +168,11 @@ body {
  
  .tab_selected {
      border-bottom: 0;
+     background-color: #DDDDDD;
  }
  
  .tab_deactivated {
-     background-color: #aaa;
+     background-color: #777777;
  }
  
  #food_table {
@@ -189,13 +192,14 @@ body {
  .food_item {
      width: 90px;
      height: 90px;
-     background-color: #e0e0e0;
+     /*background-color: #e0e0e0;*/
      border-radius: 5px;
  }
 
 .small_icon {
     width: 20px;
-    height: 20px;
+    height: auto;
+    vertical-align: middle;
  }
 
 .med_icon {
