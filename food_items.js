@@ -9,6 +9,12 @@ var food_items = [
         food_class: "C",
         icon_url: "img/food_lasagna.png",
     },
+
+    {
+        name: "Broccoli",
+        food_class: "V",
+        icon_url: "img/food_broccoli.png",
+    },
     
     {
         name: "Steamed Rice",
