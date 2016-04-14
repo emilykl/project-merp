@@ -224,6 +224,11 @@ var state_module = (function(dinner_menu, dessert_menu) {
     
     var activate_desserts = function() {
         desserts_activated = true;
+        $('#dessert_plate').css({
+        	"background-image" : "url(img/dessert.png)",
+        	"background-size" : "contain",
+        	"background-repeat" : "no-repeat"
+        });
     };
 
     var deactivate_desserts = function() {
@@ -248,6 +253,7 @@ var state_module = (function(dinner_menu, dessert_menu) {
             dinner_plate_items.push(item);
         }
         if (dinner_plate_items.length == 3) {
+        	$('#' + current_day + ' img').attr('src', 'img/smiley_full.png');
             activate_desserts();
         }
         dinner_menu[current_day] = dinner_plate_items;
@@ -276,6 +282,12 @@ var state_module = (function(dinner_menu, dessert_menu) {
     
     var initialize = function(which_day) {
         current_day = which_day;
+        $(".day").css({
+    		"border": "1px solid #999"
+    	});
+    	$("#" + which_day).css({
+    		"border": "none"
+    	});
         dinner_plate_items = dinner_menu[which_day];
         dessert_plate_item = dessert_menu[which_day];
         populate_plates(which_day);
