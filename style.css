@@ -4,7 +4,7 @@ body {
 
 #content_wrapper {
     width: 1000px;
-    height: 670px;
+    height: 700px;
     border: 1px solid green;
     margin: 0 auto;
 }
@@ -19,6 +19,7 @@ body {
     background-color: white;
     text-align: center;
     color: #999;
+    margin: 20px;
 }
 
 table{
@@ -79,9 +80,9 @@ td{
      background-color: green;
      text-align: center;
      vertical-align: center;
-     background: url('img/placemat.png') no-repeat center;
-     background-size: contain;
- }
+     background: url('img/placemat.png') no-repeat;
+     background-position: center top;
+     background-size: 65%; }
  
  #dinner_plate_P {
  	 display: inline-block;
