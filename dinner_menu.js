@@ -7,17 +7,17 @@ var dinner_menu = {
 		{
 		    name: "Steamed Rice",
 		    food_class: "C",
-		    icon_url: "graphics/example.png",
+		    icon_url: "img/food_rice.png",
 		},
 		{
 		    name: "Roast Lamb",
 		    food_class: "P",
-		    icon_url: "graphics/example.png",
+		    icon_url: "img/food_lamb.png",
 		},
 		{
 		    name: "Asparagus",
 		    food_class: "V",
-		    icon_url: "graphics/example.png",
+		    icon_url: "img/food_asparagus.png",
 		},
 	],
 	"tue": [],

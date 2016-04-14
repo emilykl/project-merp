@@ -66,7 +66,6 @@ var click_and_drag_module = (function() {
         }
         
         var element = get_element_containing_coords(event.pageX, event.pageY);
-        //console.log(selected.data("item"));
         switch(element) {
             case "trash": update_event_context.trash_can_item = selected.data("item"); break;
             case "dinner": update_event_context.dinner_plate_item = selected.data("item"); break;
@@ -206,8 +205,9 @@ var state_module = (function(dinner_menu, dessert_menu) {
             var food_item = dinner_plate_items[i];
             var food_item_div = $("<div/>");
     	    food_item_div.addClass("food_item");
-    	    //food_item_div.css("background-image", "url(" + food_item.icon_url + ")");
-    	    //food_item_div.css("background-size", "cover");
+    	    food_item_div.css("background-image", "url(" + food_item.icon_url + ")");
+    	    food_item_div.css("background-repeat", "no-repeat");
+    	    food_item_div.css("background-size", "contain");
     	    $.data(food_item_div, "item", food_item);
             $("#dinner_plate_" + food_item.food_class).append(food_item_div);
         }

@@ -2,16 +2,16 @@ body {
 	font-family: Arial;
 }
 
-body {
-    background-color: #B3E3F2;
-}
-
 #content_wrapper {
     width: 1000px;
     height: 670px;
     border: 1px solid green;
     margin: 0 auto;
 }
+
+/*
+*  calendar	
+*/
 
 #calendar_wrapper {
     width: 100%;
@@ -37,7 +37,9 @@ td{
 }
 
 .day img{
-	padding-top: 20%;
+	padding-top: 10%;
+	width: 50px;
+	height: 50px;
 }
 
 
@@ -82,24 +84,21 @@ td{
  }
  
  #dinner_plate_P {
-     width: calc(100%/3);
+ 	 display: inline-block;
+     width: 30%;
      height: 100%;
-     float: left;
-     vertical-align: center;
  }
  
  #dinner_plate_C {
-     width: calc(100%/3);
+ 	 display: inline-block;
+     width: 30%;
      height: 100%;
-     float: left;
-     vertical-align: center;
  }
  
  #dinner_plate_V {
-     width: calc(100%/3);
+ 	 display: inline-block;
+     width: 30%;
      height: 100%;
-     float: left;
-     vertical-align: center;
  }
  
  #dessert_plate_wrapper {
@@ -180,6 +179,30 @@ td{
      float: left;
  }
  
+ #dinner_plate_P .food_item {
+     width: 90px;
+     height: 90px;
+     margin-top: 30px;
+     position: absolute;
+     left: 45%;
+     top: 40%;
+ }
+
+  #dinner_plate_C .food_item {
+     width: 90px;
+     height: 90px;
+     margin-top: 30px;
+ }
+
+  #dinner_plate_V .food_item {
+     width: 90px;
+     height: 90px;
+     margin-top: 30px;
+     position: absolute;
+     left: 50%;
+     transform: translate(-10%, 100%);
+ }
+
  .food_item {
      width: 90px;
      height: 90px;
@@ -187,7 +210,6 @@ td{
      position: absolute;
      left: 50%;
      transform: translateX(-50%);
-     /*background-color: orange;*/
  }
 
   .small_icon {
