@@ -1,7 +1,7 @@
 body {
-	font-family: Arial;
-    font-size: 18px;
-    background-color: #F3F3F3;
+	font-family: "Comic Sans MS", Arial;
+    font-size: 17px;
+    background-color: #FEFEFE;
 }
 
 #content_wrapper {
@@ -20,6 +20,9 @@ body {
     text-align: center;
     color: #999;
     margin: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    background-color: #DCEDC8;
 }
 
 #calendar{
@@ -133,13 +136,14 @@ body {
  */
  
  #food_table_wrapper {
-    width: 80%;
-    height: 30%;
+    width: 90%;
+    height: 35%;
     margin: 0 auto;
     overflow: hidden;
-    /*border: 1px solid black;*/
+    border: 1px solid #aaa;
     border-radius: 5px;
-    background-color: #DDDDDD;
+    background-color: #DCEDC8;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
  }
  
  #food_table_tabs {
@@ -147,7 +151,7 @@ body {
      margin: 0;
      padding: 0;
      height: 30px;
-     background-color: #BBBBBB;
+     background-color: #F5F5F5;
  }
  
  .food_table_tab {
@@ -159,20 +163,22 @@ body {
      /*border: 1px solid black;*/
      border-top: 0;
      border-left: 0;
+     padding-left: 3px;
  }
  
  #tab_D {
      border-right: 0;
-     width: 20%;
+     width: calc(20% - 11px);
  }
  
  .tab_selected {
      border-bottom: 0;
-     background-color: #DDDDDD;
+     background-color: #DCEDC8;
  }
  
  .tab_deactivated {
-     background-color: #777777;
+     background-color: #999;
+     color: #444;
  }
  
  #food_table {

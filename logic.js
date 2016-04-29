@@ -260,18 +260,14 @@ var state_module = (function(dinner_menu, dessert_menu) {
         $('#' + current_day + ' img').attr('src', 'img/smiley_full.png');
         $('#tab_D img').attr('src', 'img/icon_d1.png');
         desserts_activated = true;
-        $('#dessert_plate').css({
-        	'visibility': 'visible'
-        });
+        $('#dessert_plate').removeClass("hidden");
     };
 
     var deactivate_desserts = function() {
     	$('#' + current_day + ' img').attr('src', 'img/smiley_empty.png');
     	$('#tab_D img').attr('src', 'img/lock.png');
     	desserts_activated = false;
-    	$('#dessert_plate').css({
-    		'visibility': 'hidden'
-    	});
+    	$('#dessert_plate').addClass("hidden");
     };
     
     var add_dinner_item = function(item) {
