@@ -196,6 +196,35 @@ body {
      border-radius: 5px;
  }
 
+ .food_tag {
+    height: 25px;
+ }
+
+ .food_category {
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+ }
+
+ .food_category_P {
+    background-image: url('img/icon_p1.png');
+ }
+
+ .food_category_V {
+    background-image: url('img/icon_v1.png');
+ }
+
+ .food_category_C {
+    background-image: url('img/icon_c1.png');
+ }
+
+ .food_name {
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: top;
+ }
+
 .small_icon {
     width: 20px;
     height: auto;

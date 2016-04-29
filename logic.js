@@ -138,6 +138,11 @@ var tabs_module = (function(food_items) {
     	    food_item_div.data("item", food_item);
     	    
     	    food_item_wrapper.append(food_item_div);
+            food_item_wrapper.append(
+                '<div class="food_tag">\
+                    <div class="food_category food_category_' + food_item.food_class + '"></div> \
+                    <div class="food_name">'+ food_item.name +'</div> \
+                </div>');
     	    food_table.append(food_item_wrapper);
     	}
     	
@@ -379,11 +384,6 @@ $(document).ready(function() {
 
     $(".day").click(function(e){
     	state_module.initialize(e.currentTarget.id);
-    });
-
-    var trash_can = document.getElementById("trash_can");
-    trash_can.addEventListener("animationend", function(){
-        $("#trash_can").removeClass("jiggle_animation");
     });
     
     click_and_drag_module.initialize();
