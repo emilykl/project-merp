@@ -138,6 +138,11 @@ var tabs_module = (function(food_items) {
     	    food_item_div.data("item", food_item);
     	    
     	    food_item_wrapper.append(food_item_div);
+            food_item_wrapper.append(
+                '<div class="food_tag">\
+                    <div class="food_category food_category_' + food_item.food_class + '"></div> \
+                    <div class="food_name">'+ food_item.name +'</div> \
+                </div>');
     	    food_table.append(food_item_wrapper);
     	}
     	
@@ -311,6 +316,12 @@ var state_module = (function(dinner_menu, dessert_menu) {
             deactivate_desserts();
         }
         populate_plates(current_day);
+        $('#trash_can_wrapper').remove();
+        $('#dinner_plate_wrapper').before(
+            '<div id="trash_can_wrapper"> \
+                <div id="trash_can" class="jiggle_animation"> \
+            </div> \
+        </div>');
     };
     
     var initialize = function(which_day) {
@@ -385,7 +396,6 @@ $(document).ready(function() {
     $(".day").click(function(e){
     	state_module.initialize(e.currentTarget.id);
     });
-    
     
     click_and_drag_module.initialize();
     tabs_module.initialize();

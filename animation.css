@@ -1,0 +1,13 @@
+@keyframes jiggle{
+	0% { transform: rotate(-5deg); }
+	25% { transform: rotate(5deg); }
+	50% { transform: rotate(-5deg); }
+	75% { transform: rotate(5deg); }
+	100% { transform: rotate(-5deg); }
+}
+
+.jiggle_animation {
+	animation-name: jiggle;
+	animation-duration: 0.5s;
+	animation-iteration-count: 3;
+}
