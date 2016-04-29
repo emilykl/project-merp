@@ -311,6 +311,12 @@ var state_module = (function(dinner_menu, dessert_menu) {
             deactivate_desserts();
         }
         populate_plates(current_day);
+        $('#trash_can_wrapper').remove();
+        $('#dinner_plate_wrapper').before(
+            '<div id="trash_can_wrapper"> \
+                <div id="trash_can" class="jiggle_animation"> \
+            </div> \
+        </div>');
     };
     
     var initialize = function(which_day) {
@@ -374,7 +380,11 @@ $(document).ready(function() {
     $(".day").click(function(e){
     	state_module.initialize(e.currentTarget.id);
     });
-    
+
+    var trash_can = document.getElementById("trash_can");
+    trash_can.addEventListener("animationend", function(){
+        $("#trash_can").removeClass("jiggle_animation");
+    });
     
     click_and_drag_module.initialize();
     tabs_module.initialize();
