@@ -359,7 +359,9 @@ $(document).ready(function() {
     
     //adjust content wrapper to screen size
     (function() {
+        var min_width = 860;
         var screen_x = .75*window.innerWidth;
+        screen_x = screen_x >= min_width ? screen_x : min_width;
         var y_ratio = 0.63
         $("#content_wrapper").css({
             width: screen_x + "px",
