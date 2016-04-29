@@ -344,7 +344,18 @@ var state_module = (function(dinner_menu, dessert_menu) {
 /**********************************
  * run on load.
  **********************************/ 
-$(document).ready(function() {     
+$(document).ready(function() {
+    
+    //adjust content wrapper to screen size
+    (function() {
+        var screen_x = .75*window.innerWidth;
+        var y_ratio = 0.63
+        $("#content_wrapper").css({
+            width: screen_x + "px",
+            height: y_ratio*screen_x + "px",
+        });
+    }());
+    
     $("body").on(click_and_drag_module.update_event, function(event, context) {
         tabs_module.refresh_food_bank();
         if (context.trash_can_item != null) {
