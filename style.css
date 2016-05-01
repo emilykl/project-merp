@@ -226,6 +226,10 @@ body {
     background-image: url('img/icon_c1.png');
  }
 
+ .food_category_D {
+    background-image: url('img/icon_d1.png');
+ }
+
  .food_name {
     font-size: 14px;
     display: inline-block;
