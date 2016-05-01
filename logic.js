@@ -34,12 +34,7 @@ var click_and_drag_module = (function() {
                    && y >= dessertplate_offset.top 
                    && y <= dessertplate_offset.top + $("#dessert_plate").height()) {
             return "dessert";
-        } /*else if (x >= foodtable_offset.left 
-                   && x <= foodtable_offset.left + $("#food_table").width()
-                   && y >= foodtable_offset.top 
-                   && y <= foodtable_offset.top + $("#food_table").height()) {
-            return "food";
-        }*/
+        }
         return "";
     };
     
@@ -58,7 +53,9 @@ var click_and_drag_module = (function() {
         selected.css("position", "absolute");
         selected.css("left", event.pageX + offsetX);
         selected.css("top", event.pageY + offsetY);
-        if (get_element_containing_coords(event.pageX, event.pageY)){
+        if (get_element_containing_coords(event.pageX, event.pageY) == 'dinner' || 
+            get_element_containing_coords(event.pageX, event.pageY) == 'dessert'){ 
+            // trash can jiggles when you pick up food a plate.
            $('#trash_can_wrapper').remove();
            $('#dinner_plate_wrapper').before(
                '<div id="trash_can_wrapper"> \
@@ -278,7 +275,7 @@ var state_module = (function(dinner_menu, dessert_menu) {
     	$('#dessert_plate').addClass("hidden");
     };
     
-    var add_dinner_item = function(item) {
+    var add_dinner_item = function(item, undo=false) {
         if (item.food_class == "D") {
             populate_plates(current_day);
             return;
@@ -288,29 +285,35 @@ var state_module = (function(dinner_menu, dessert_menu) {
         for (var i = 0; i < dinner_plate_items.length; i++) {
             var food_item = dinner_plate_items[i];
             if (item.food_class == food_item.food_class) {
+                if (!undo){
+                    add_to_undo_stack(new Event('delete', dinner_plate_items[i]));
+                    add_to_undo_stack(new Event('add', item));
+                }
                 dinner_plate_items[i] = item;
                 replaced = true;
             }
         }
         if (!replaced) {
             dinner_plate_items.push(item);
+            if (!undo) add_to_undo_stack(new Event('add', item));
         }
         if (dinner_plate_items.length == 3) activate_desserts();
         dinner_menu[current_day] = dinner_plate_items;
         populate_plates(current_day);
     };
     
-    var add_dessert_item = function(item) {
+    var add_dessert_item = function(item, undo=false) {
         if (item.food_class != "D") {
             populate_plates(current_day);
             return;
         }
         dessert_plate_item = item;
         dessert_menu[current_day] = dessert_plate_item;
+        if (!undo) add_to_undo_stack(new Event('add', item));
         populate_plates(current_day);
     };
     
-    var delete_item = function(item) {
+    var delete_item = function(item, undo=false) {
         if (item == dessert_plate_item) {
             dessert_plate_item = null;
         	dessert_menu[current_day] = dessert_plate_item;
@@ -319,13 +322,16 @@ var state_module = (function(dinner_menu, dessert_menu) {
             dinner_plate_items.splice(dinner_index, 1);
             deactivate_desserts();
         }
+        if (!undo){
+            add_to_undo_stack(new Event('delete', item));
+        }
         populate_plates(current_day);
-        $('#trash_can_wrapper').remove();
+        /*$('#trash_can_wrapper').remove();
         $('#dinner_plate_wrapper').before(
             '<div id="trash_can_wrapper"> \
                 <div id="trash_can" class="jiggle_animation"> \
             </div> \
-        </div>');
+        </div>');*/
     };
     
     var initialize = function(which_day) {
@@ -406,6 +412,6 @@ $(document).ready(function() {
     click_and_drag_module.initialize();
     tabs_module.initialize();
     state_module.initialize("sun");
-    
+    setup_undo_redo();
 });
 

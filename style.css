@@ -75,6 +75,7 @@ body {
      width: 50%;
      height: 100%;
      float: left;
+     position: relative;
  }
  
  #dinner_plate {
@@ -246,3 +247,24 @@ body {
     width: 40px;
     height: 40px;
  }
+
+/* Undo, redo buttons */
+#undo_button {
+    left: 0;
+    top: 0;
+    background-image: url("img/undo arrow inactive.png");
+}
+
+#redo_button {
+    left: 0;
+    top: 50px;
+    background-image: url("img/redo arrow inactive.png");
+}
+
+.undo_redo_buttons {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
