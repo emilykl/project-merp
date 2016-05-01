@@ -58,6 +58,14 @@ var click_and_drag_module = (function() {
         selected.css("position", "absolute");
         selected.css("left", event.pageX + offsetX);
         selected.css("top", event.pageY + offsetY);
+        if (get_element_containing_coords(event.pageX, event.pageY)){
+           $('#trash_can_wrapper').remove();
+           $('#dinner_plate_wrapper').before(
+               '<div id="trash_can_wrapper"> \
+                   <div id="trash_can" class="jiggle_animation"> \
+               </div> \
+           </div>'); 
+        }
     };
     
     var mouse_move_function = function() {
