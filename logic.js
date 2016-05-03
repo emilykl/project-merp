@@ -269,7 +269,6 @@ var state_module = (function(dinner_menu, dessert_menu) {
     };
 
     var deactivate_desserts = function() {
-    	$('#' + current_day + ' img').attr('src', 'img/smiley_empty.png');
     	$('#tab_D img').attr('src', 'img/lock.png');
     	desserts_activated = false;
     	$('#dessert_plate').addClass("hidden");
@@ -297,7 +296,12 @@ var state_module = (function(dinner_menu, dessert_menu) {
             dinner_plate_items.push(item);
             if (!undo) add_to_undo_stack(new Event('add', item));
         }
-        if (dinner_plate_items.length == 3) activate_desserts();
+        if (dinner_plate_items.length == 1){
+            $('#' + current_day + ' img').attr('src', 'img/smiley_1.png');
+        } else if (dinner_plate_items.length == 2){
+            $('#' + current_day + ' img').attr('src', 'img/smiley_2.png');
+        } else if (dinner_plate_items.length == 3) activate_desserts();
+
         dinner_menu[current_day] = dinner_plate_items;
         populate_plates(current_day);
     };
@@ -326,6 +330,18 @@ var state_module = (function(dinner_menu, dessert_menu) {
             add_to_undo_stack(new Event('delete', item));
         }
         populate_plates(current_day);
+
+        if (dinner_plate_items.length == 0){
+            $('#' + current_day + ' img').attr('src', 'img/smiley_empty.png');
+        }
+        if (dinner_plate_items.length == 1){
+            $('#' + current_day + ' img').attr('src', 'img/smiley_1.png');
+        }
+        if (dinner_plate_items.length == 2){
+            $('#' + current_day + ' img').attr('src', 'img/smiley_2.png');
+        } 
+    
+
         /*$('#trash_can_wrapper').remove();
         $('#dinner_plate_wrapper').before(
             '<div id="trash_can_wrapper"> \
@@ -360,6 +376,67 @@ var state_module = (function(dinner_menu, dessert_menu) {
     
 }(dinner_menu, dessert_menu));
 
+/////
+
+var days = { 0:"sun", 1:"mon", 2:"tue", 3:"wed", 4:"thu", 5:"fri", 6:"sat" };
+var calendar_start_date = 10;
+
+var reset_click_targets = function() {
+
+    $(".day").click(function(e){
+        state_module.initialize(e.currentTarget.id);
+    });
+
+    $("#left_arrow").click(function(e){
+        if (calendar_start_date > 3) {
+            calendar_start_date -= 7;
+            populate_calendar(calendar_start_date);
+            if (calendar_start_date == 3)
+                state_module.initialize("sun-1");
+            else 
+                state_module.initialize("sun-2");
+        }
+    });
+
+    $("#right_arrow").click(function(e){
+        if (calendar_start_date < 17) {
+            calendar_start_date += 7;
+            populate_calendar(calendar_start_date);
+            if (calendar_start_date == 10)
+                state_module.initialize("sun-2");
+            else 
+                state_module.initialize("sun-3");
+        }
+    });
+}
+
+var populate_calendar = function(start_date){
+
+    $("#calendar").html("");
+    var id = null;
+    if (start_date == 3) id = 1;
+    else if (start_date == 10) id = 2;
+    else id = 3;
+
+    var calendar_innerHTML = '<tr><td id="left_arrow" class="arrow"><img src="img/arrow_left.png"></img></td>';
+    for (var i = 0; i < 7; i++) {
+        var img_src = "";
+        if (dinner_menu[days[i] + '-'+ id].length == 3)
+            img_src = "img/smiley_full.png";
+        else if (dinner_menu[days[i] + '-'+ id].length == 2)
+            img_src = "img/smiley_2.png";
+        else if (dinner_menu[days[i] + '-'+ id].length == 1)
+            img_src = "img/smiley_1.png";
+        else
+            img_src = "img/smiley_empty.png";
+        calendar_innerHTML += '<td id='+ days[i] + '-'+ id + ' class="day">' + days[i] +' (4/' + (start_date + i) +')<img src="'+ img_src +'"></td>';
+    }
+    calendar_innerHTML += '<td id="right_arrow" class="arrow"><img src="img/arrow_right.png" /></td></tr>';
+    $("#calendar").html(calendar_innerHTML);
+
+    reset_click_targets();
+}
+
 
 
 /**********************************
@@ -378,6 +455,8 @@ $(document).ready(function() {
             height: y_ratio*screen_x + "px",
         });
     }());
+
+    populate_calendar(calendar_start_date);
     
     $("body").on(click_and_drag_module.update_event, function(event, context) {
         tabs_module.refresh_food_bank();
@@ -404,14 +483,10 @@ $(document).ready(function() {
         }
         click_and_drag_module.apply();
     });
-
-    $(".day").click(function(e){
-    	state_module.initialize(e.currentTarget.id);
-    });
     
     click_and_drag_module.initialize();
     tabs_module.initialize();
-    state_module.initialize("sun");
+    state_module.initialize("sun-2");
     setup_undo_redo();
 });
 
