@@ -80,6 +80,7 @@ body {
      width: 50%;
      height: 100%;
      float: left;
+     position: relative;
  }
  
  #dinner_plate {
@@ -231,6 +232,10 @@ body {
     background-image: url('img/icon_c1.png');
  }
 
+ .food_category_D {
+    background-image: url('img/icon_d1.png');
+ }
+
  .food_name {
     font-size: 14px;
     display: inline-block;
@@ -247,3 +252,24 @@ body {
     width: 40px;
     height: 40px;
  }
+
+/* Undo, redo buttons */
+#undo_button {
+    left: 0;
+    top: 0;
+    background-image: url("img/undo arrow inactive.png");
+}
+
+#redo_button {
+    left: 0;
+    top: 50px;
+    background-image: url("img/redo arrow inactive.png");
+}
+
+.undo_redo_buttons {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}

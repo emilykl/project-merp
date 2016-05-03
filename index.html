@@ -15,6 +15,7 @@
         
     <div id="calendar_wrapper">
         <table id="calendar">
+            <!--
         	<tr>
         		<td id="left_arrow" class="arrow"><img src="img/arrow_left.png"></img></td>
         		<td id="sun" class="day">Sun (4/10)<img src="img/smiley_empty.png"></td>
@@ -26,6 +27,7 @@
         		<td id="sat" class="day">Sat (4/16)<img src="img/smiley_empty.png"></td>
         		<td id="right_arrow" class="arrow"><img src="img/arrow_right.png" /></td>
         	</tr>
+            -->
         </table>
     </div>
     
@@ -37,6 +39,8 @@
     	</div>
     	
     	<div id="dinner_plate_wrapper">
+            <div id="undo_button" class="undo_redo_buttons"></div>
+            <div id="redo_button" class="undo_redo_buttons"></div>
     	    <div id="dinner_plate">
     	        <table>
     	            <tr>
@@ -62,10 +66,11 @@
     <div id="food_table_wrapper">
         
         <ul id="food_table_tabs">
-            <li id="tab_A" class="food_table_tab tab_selected">All Foods 
+            <li id="tab_A" class="food_table_tab tab_selected">
                 <img class="small_icon" src="img/icon_p1.png"></img>
                 <img class="small_icon" src="img/icon_c1.png"></img>
                 <img class="small_icon" src="img/icon_v1.png"></img>
+                All Foods 
             </li>
             <li id="tab_P" class="food_table_tab"><img class="small_icon" src="img/icon_p1.png"></img> Protein</li>
             <li id="tab_C" class="food_table_tab"><img class="small_icon" src="img/icon_c1.png"></img> Carbs</li>
@@ -83,6 +88,7 @@
 <script type="text/javascript" src="external_js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="food_items.js"></script>
 <script type="text/javascript" src="dinner_menu.js"></script>
+<script type="text/javascript" src="deleted_stack.js"></script>
 <script type="text/javascript" src="logic.js"></script>
     
 </body>
