@@ -2,6 +2,11 @@ body {
 	font-family: "Comic Sans MS", Arial;
     font-size: 17px;
     background-color: #FEFEFE;
+    background-image: url("img/wood.jpg");
+    /* 
+     * Photo credit: www.http://wallpapercave.com/hd-wood-background
+     */
+    background-size: contain;
 }
 
 #content_wrapper {
