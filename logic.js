@@ -46,6 +46,10 @@ var click_and_drag_module = (function() {
         update_event_context.dessert_plate_item = null;
         
         var selected = $(this);
+        var parent = selected.parent(); 
+        if (!parent.is("body")) {
+            parent.find(".food_tag").remove();
+        }
         selected.addClass(class_selected);
         offsetX = selected.offset().left - event.pageX;
         offsetY = selected.offset().top - event.pageY;

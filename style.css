@@ -2,10 +2,10 @@ body {
 	font-family: "Comic Sans MS", Arial;
     font-size: 17px;
     background-color: #FEFEFE;
-    background-image: url("img/wood.jpg");
     /* 
      * Photo credit: www.http://wallpapercave.com/hd-wood-background
      */
+    background-image: url("img/wood.jpg");
     background-size: contain;
 }
 
@@ -71,7 +71,7 @@ body {
  #trash_can {
      width: 100%;
      height: 100%;
-     background: url('img/trashcan.png') no-repeat;
+     background: url('img/trashcan_shadowed.png') no-repeat;
      background-position: center center;
      background-size: 40%;
 }
@@ -95,13 +95,30 @@ body {
      background-position: center center;
  }
  
- #dinner_plate table {
-     width: calc(100% - 200px);
-	 height: 200px;
+ #dinner_plate_food_wrapper {
+     width: calc(80% - 200px);
+	 height: 150px;
 	 margin-top: 40px;
-	 margin-left: 100px;
-	 table-layout: fixed;
-	 border-collapse: collapse;
+	 margin-left: 140px;
+ }
+ 
+ #dinner_plate_C {
+     width: 100%;
+     height: 50%;
+     padding-left: calc(50% - 45px); 
+     float: left;
+ }
+ 
+ #dinner_plate_P {
+     width: 50%;
+     height: 50%;
+     float: left;
+ }
+ 
+ #dinner_plate_V {
+     width: 50%;
+     height: 50%;
+     float: left;
  }
  
  #dinner_plate_icon_wrapper {
@@ -128,8 +145,8 @@ body {
      background-size: contain;
      background-repeat: no-repeat;
      background-position: center center;  
-     padding-left: 80px;
-     padding-top: 100px;
+     padding-left: 73px;
+     padding-top: 70px;
  }
  
  .hidden {
@@ -158,7 +175,7 @@ body {
      margin: 0;
      padding: 0;
      height: 30px;
-     background-color: #F5F5F5;
+     background-color: #ccc;
  }
  
  .food_table_tab {
@@ -173,18 +190,31 @@ body {
      padding-left: 3px;
  }
  
+ #tab_P {
+     background-color: #E1BEE7;
+ }
+ 
+ #tab_C {
+     background-color: #FFE0B2;
+ }
+ 
+  #tab_V {
+     background-color: #A5D6A7;
+ }
+ 
  #tab_D {
      border-right: 0;
      width: calc(20% - 11px);
+     background-color: #B3E5FC;
  }
  
  .tab_selected {
      border-bottom: 0;
-     background-color: #DCEDC8;
+     background-color: #DCEDC8 !important;
  }
  
  .tab_deactivated {
-     background-color: #999;
+     background-color: #999 !important;
      color: #444;
  }
  
