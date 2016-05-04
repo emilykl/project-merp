@@ -279,7 +279,7 @@ var state_module = (function(dinner_menu, dessert_menu) {
     	$('#dessert_plate').addClass("hidden");
     };
     
-    var add_dinner_item = function(item, undo=false) {
+    var add_dinner_item = function(item, undo) {
         if (item.food_class == "D") {
             populate_plates(current_day);
             return;
@@ -310,7 +310,7 @@ var state_module = (function(dinner_menu, dessert_menu) {
         populate_plates(current_day);
     };
     
-    var add_dessert_item = function(item, undo=false) {
+    var add_dessert_item = function(item, undo) {
         if (item.food_class != "D") {
             populate_plates(current_day);
             return;
@@ -321,7 +321,7 @@ var state_module = (function(dinner_menu, dessert_menu) {
         populate_plates(current_day);
     };
     
-    var delete_item = function(item, undo=false) {
+    var delete_item = function(item, undo) {
         if (item == dessert_plate_item) {
             dessert_plate_item = null;
         	dessert_menu[current_day] = dessert_plate_item;
@@ -458,11 +458,11 @@ $(document).ready(function() {
     $("body").on(click_and_drag_module.update_event, function(event, context) {
         tabs_module.refresh_food_bank();
         if (context.trash_can_item != null) {
-            state_module.delete_item(context.trash_can_item);
+            state_module.delete_item(context.trash_can_item, false);
         } else if (context.dinner_plate_item != null) {
-            state_module.add_dinner_item(context.dinner_plate_item);
+            state_module.add_dinner_item(context.dinner_plate_item, false);
         } else if (context.dessert_plate_item != null) {
-            state_module.add_dessert_item(context.dessert_plate_item);
+            state_module.add_dessert_item(context.dessert_plate_item, false);
         } else {
             state_module.refresh();
         }
