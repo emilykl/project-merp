@@ -57,8 +57,8 @@ var click_and_drag_module = (function() {
         selected.css("position", "absolute");
         selected.css("left", event.pageX + offsetX);
         selected.css("top", event.pageY + offsetY);
-        if (get_element_containing_coords(event.pageX, event.pageY) == 'dinner' || 
-            get_element_containing_coords(event.pageX, event.pageY) == 'dessert'){ 
+        var mouse_down_start = get_element_containing_coords(event.pageX, event.pageY);
+        if (mouse_down_start == 'dinner' || mouse_down_start == 'dessert'){ 
             // trash can jiggles when you pick up food a plate.
            $('#trash_can_wrapper').remove();
            $('#dinner_plate_wrapper').before(
@@ -69,7 +69,7 @@ var click_and_drag_module = (function() {
         }
     };
     
-    var mouse_move_function = function() {
+    var mouse_move_function = function(event) {
         var selected = $("." + class_selected);
         selected.css("left", event.pageX + offsetX);
         selected.css("top", event.pageY + offsetY);
@@ -82,6 +82,7 @@ var click_and_drag_module = (function() {
         }
         
         var element = get_element_containing_coords(event.pageX, event.pageY);
+
         switch(element) {
             case "trash": update_event_context.trash_can_item = selected.data("item"); break;
             case "dinner": update_event_context.dinner_plate_item = selected.data("item"); break;
@@ -288,9 +289,8 @@ var state_module = (function(dinner_menu, dessert_menu) {
         for (var i = 0; i < dinner_plate_items.length; i++) {
             var food_item = dinner_plate_items[i];
             if (item.food_class == food_item.food_class) {
-                if (!undo){
-                    add_to_undo_stack(new Event('delete', dinner_plate_items[i]));
-                    add_to_undo_stack(new Event('add', item));
+                if (!undo && item.name != food_item.name){
+                    add_to_undo_stack(new Event('replace', {'from': food_item, 'to': item }));
                 }
                 dinner_plate_items[i] = item;
                 replaced = true;
@@ -344,14 +344,6 @@ var state_module = (function(dinner_menu, dessert_menu) {
         if (dinner_plate_items.length == 2){
             $('#' + current_day + ' img').attr('src', 'img/smiley_2.png');
         } 
-    
-
-        /*$('#trash_can_wrapper').remove();
-        $('#dinner_plate_wrapper').before(
-            '<div id="trash_can_wrapper"> \
-                <div id="trash_can" class="jiggle_animation"> \
-            </div> \
-        </div>');*/
     };
     
     var initialize = function(which_day) {
@@ -367,6 +359,7 @@ var state_module = (function(dinner_menu, dessert_menu) {
         if (dinner_plate_items.length == 3) activate_desserts();
         else deactivate_desserts();
         populate_plates(which_day);
+        initialize_undo_stack(current_day);
     };
     
     return {
@@ -491,6 +484,6 @@ $(document).ready(function() {
     click_and_drag_module.initialize();
     tabs_module.initialize();
     state_module.initialize("sun-2");
-    setup_undo_redo();
+    add_undo_redo_listener();
 });
 
