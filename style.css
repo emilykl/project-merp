@@ -40,8 +40,8 @@ body {
     color: #999;
     margin: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border: 1px solid #aaa;
-    border-radius: 10px;
+    /*border: 1px solid #aaa;*/
+    border-radius: 5px;
     background-color: #DCEDC8;
 }
 
@@ -175,10 +175,10 @@ body {
  
  #food_table_wrapper {
     width: 90%;
-    height: 35%;
+    height: 55%;
     margin: 0 auto;
     overflow: hidden;
-    border: 1px solid #aaa;
+    /*border: 1px solid #aaa;*/
     border-radius: 5px;
     background-color: #DCEDC8;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
