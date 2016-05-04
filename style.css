@@ -1,12 +1,26 @@
 body {
-	font-family: "Comic Sans MS", Arial;
+    font-family: "short_stackregular", Arial;
+    letter-spacing: -1.5px;
     font-size: 17px;
     background-color: #FEFEFE;
     /* 
-     * Photo credit: www.http://wallpapercave.com/hd-wood-background
+     * Photo credit: http://www.psdgraphics.com/backgrounds/light-wooden-background/
      */
-    background-image: url("img/wood.jpg");
-    background-size: contain;
+    background-image: url("img/light-wooden-background.jpg");
+    /*background-size: contain;*/
+}
+
+@font-face {
+    font-family: 'short_stackregular';
+    src: url('font/shortstack-regular-webfont.eot');
+    src: url('font/shortstack-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/shortstack-regular-webfont.woff2') format('woff2'),
+         url('font/shortstack-regular-webfont.woff') format('woff'),
+         url('font/shortstack-regular-webfont.ttf') format('truetype'),
+         url('font/shortstack-regular-webfont.svg#short_stackregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
 #content_wrapper {
